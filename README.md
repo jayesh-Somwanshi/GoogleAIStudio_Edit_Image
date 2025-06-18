@@ -71,7 +71,7 @@ GEMINI_API_KEY=your_gemini_api_key_here
 Run the Go server:
 
 ```bash
-go run main.go
+go to go project file path: go run main.go
 ```
 
 It will run on `http://localhost:8081`.
