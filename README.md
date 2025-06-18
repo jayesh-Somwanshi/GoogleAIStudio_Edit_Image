@@ -51,7 +51,7 @@ spring-go-image-generator/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/spring-go-image-generator.git
+git clone https://github.com/jayesh-Somwanshi/GoogleAIStudio_Edit_Image.git
 cd spring-go-image-generator
 ```
 
