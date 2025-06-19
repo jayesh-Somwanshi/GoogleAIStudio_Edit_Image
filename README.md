@@ -51,7 +51,7 @@ spring-go-image-generator/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/jayesh-Somwanshi/GoogleAIStudio_Edit_Image.git
+git clone https://github.com/yourusername/spring-go-image-generator.git
 cd spring-go-image-generator
 ```
 
@@ -71,7 +71,7 @@ GEMINI_API_KEY=your_gemini_api_key_here
 Run the Go server:
 
 ```bash
-go to go project file path: go run main.go
+go run main.go
 ```
 
 It will run on `http://localhost:8081`.

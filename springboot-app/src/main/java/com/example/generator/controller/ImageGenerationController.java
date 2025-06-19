@@ -31,7 +31,7 @@ public class ImageGenerationController {
             RestTemplate restTemplate = new RestTemplate();
 
             ResponseEntity<byte[]> response = restTemplate.exchange(
-                    "http://localhost:8081/generate",
+                    "http://localhost:9095/generate",
                     HttpMethod.POST,
                     requestEntity,
                     byte[].class

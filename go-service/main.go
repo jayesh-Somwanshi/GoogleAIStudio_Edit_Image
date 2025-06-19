@@ -22,8 +22,8 @@ func main() {
 	}
 
 	http.HandleFunc("/generate", handleGenerate)
-	log.Println("Go server started on :8081")
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	log.Println("Go server started on :9095")
+	log.Fatal(http.ListenAndServe(":9095", nil))
 }
 
 func handleGenerate(w http.ResponseWriter, r *http.Request) {
