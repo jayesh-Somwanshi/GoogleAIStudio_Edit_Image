@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-image: url('/Image/BG_Image.jpg');
+  background-image: url('/static/Image/BG_Image.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
