@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generated Image</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .result-container {
+          text-align: center;
+          padding: 2rem;
+        }
+
+        #generatedImage {
+          max-width: 90%;
+          border-radius: 12px;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+          margin-top: 2rem;
+        }
+
+        .subtitle {
+          font-size: 1rem;
+          font-style: italic;
+          color: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="container result-container">
+    <h1>Generated Image</h1>
+    <p class="subtitle">Gemini 2.0 Flash Preview Output</p>
+    <img id="generatedImage" alt="Generated image will appear here" />
+</div>
+
+<script>
+    const imageUrl = localStorage.getItem("generatedImageURL");
+    if (imageUrl) {
+      document.getElementById("generatedImage").src = imageUrl;
+    } else {
+      document.body.innerHTML = "<h2 style='text-align:center;'>No image found. Please generate one first.</h2>";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gemini AI Image Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1>Gemini AI Image Generator</h1>
+  <p class="subtitle">Gemini 2.0 Flash Preview Image Generation</p>
+
+  <form id="uploadForm" enctype="multipart/form-data">
+    <label for="description">Prompt</label>
+    <textarea id="description" name="description" required placeholder="Enter your creative image prompt..."></textarea>
+
+    <label for="image">Upload Image</label>
+    <input type="file" id="image" name="image" accept="image/*" required />
+
+    <button type="submit">Generate Image</button>
+  </form>
+
+  <div id="loader" class="loader" hidden></div>
+</div>
+
+<script>
+  const form = document.getElementById("uploadForm");
+  const loader = document.getElementById("loader");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    loader.hidden = false;
+
+    const formData = new FormData();
+    formData.append("description", document.getElementById("description").value);
+    formData.append("image", document.getElementById("image").files[0]);
+
+    try {
+      const response = await fetch("/api/image/generate", {
+        method: "POST",
+        body: formData
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        localStorage.setItem("generatedImageURL", imageUrl);
+        window.open("result.html", "_blank");
+      } else {
+        alert("Image generation failed. Please try again.");
+      }
+    } catch (err) {
+      alert("An error occurred: " + err.message);
+    } finally {
+      loader.hidden = true;
+    }
+  });
+</script>
+</body>
+</html>
