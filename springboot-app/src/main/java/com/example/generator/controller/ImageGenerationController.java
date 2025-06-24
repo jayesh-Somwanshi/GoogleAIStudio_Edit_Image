@@ -1,6 +1,7 @@
 package com.example.generator.controller;
 
 import com.example.generator.resourceFile.MultipartInputStreamFileResource;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -168,6 +170,94 @@ public class ImageGenerationController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error summarizing PDF");
+        }
+    }
+
+    @PostMapping("/code-execute")
+    public ResponseEntity<String> executePromptCode(@RequestParam("prompt") String prompt) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+            formData.add("prompt", prompt);
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(formData, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    "http://localhost:9095/code-execute",
+                    HttpMethod.POST,
+                    request,
+                    String.class
+            );
+
+            return ResponseEntity.ok(response.getBody());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"error\":\"Code execution failed\"}");
+        }
+    }
+
+    @PostMapping("/image-understanding-by-url")
+    public ResponseEntity<String> summarizeImageWithPrompt(
+            @RequestParam("imageUrl") String imageUrl,
+            @RequestParam("prompt") String prompt) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
+            form.add("imageUrl", imageUrl);
+            form.add("prompt", prompt);
+
+            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(form, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    "http://localhost:9095/image-understanding-by-url",
+                    HttpMethod.POST,
+                    request,
+                    String.class
+            );
+
+            return ResponseEntity.ok(response.getBody());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"error\":\"Image summarization failed\"}");
+        }
+    }
+
+
+    @PostMapping("/youtube-video-understanding-By-URL")
+    public ResponseEntity<String> summarizeVideoWithPrompt(
+            @RequestParam("videoUrl") String videoUrl,
+            @RequestParam("prompt") String prompt) {
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
+            form.add("videoUrl", videoUrl);
+            form.add("prompt", prompt);
+
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(form, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    "http://localhost:9095/youtube-video-understanding-By-URL",
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+
+            return ResponseEntity.ok(response.getBody());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"error\":\"Video summarization failed\"}");
         }
     }
 
