@@ -141,3 +141,7 @@ curl --location 'http://localhost:8080/api/image/generate' --form 'image=@"postm
 
 ---
 
+Gemini models
+1. gemini-2.0-flash
+2. gemini-2.5-flash
+3. gemini-2.0-flash-preview-image-generation

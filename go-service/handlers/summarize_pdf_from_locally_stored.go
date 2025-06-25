@@ -10,7 +10,7 @@ import (
 	"google.golang.org/genai"
 )
 
-func HandlePDFSummary(w http.ResponseWriter, r *http.Request) {
+func HandlePDFLocallySummary(w http.ResponseWriter, r *http.Request) {
 	description := r.FormValue("description")
 	if description == "" {
 		description = "Give me a summary of this PDF file."
